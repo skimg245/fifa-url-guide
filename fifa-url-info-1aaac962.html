@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>世界杯 · 再次遇见的地方</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #fafaf9;
+            font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+            color: #1f1e1b;
+            line-height: 1.75;
+            padding: 2.5rem 1.25rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page {
+            max-width: 700px;
+            width: 100%;
+            background: #ffffff;
+            padding: 3rem 2.5rem 4rem;
+            border-radius: 32px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1.25rem 0.75rem; }
+            .page { padding: 2rem 1.25rem 3rem; border-radius: 24px; }
+        }
+
+        /* 标题层级 – 清晰，有留白 */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-top: 0.2rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+            color: #1d1b16;
+        }
+        .subhead {
+            font-size: 1.05rem;
+            font-weight: 350;
+            color: #6b655b;
+            border-left: 2px solid #d1cbc2;
+            padding-left: 1rem;
+            margin: 0 0 2rem 0;
+            line-height: 1.6;
+        }
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #2b2822;
+            margin: 2.4rem 0 0.8rem 0;
+            border-bottom: 1px solid #ece8e2;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: #3b352d;
+            margin: 1.6rem 0 0.4rem 0;
+        }
+        p {
+            margin: 0.6rem 0 1rem 0;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+        a {
+            color: #1f3b4d;
+            text-decoration: none;
+            border-bottom: 1px solid #ccdae5;
+            transition: border-color 0.2s, color 0.15s;
+        }
+        a:hover, a:focus {
+            color: #0a1f2e;
+            border-bottom-color: #0a1f2e;
+            outline: none;
+        }
+        .quiet-link {
+            border-bottom: 0;
+            color: inherit;
+        }
+        .quiet-link:hover { border-bottom: 0; opacity: 0.7; }
+
+        /* 卡片式的亮点区 */
+        .highlight-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.8rem 0 1.2rem 0;
+        }
+        .highlight-item {
+            flex: 1 1 180px;
+            background: #f7f5f2;
+            border-radius: 20px;
+            padding: 1.25rem 1rem;
+            border: 1px solid #efebe5;
+            transition: background 0.15s;
+        }
+        .highlight-item:hover { background: #f2eee9; }
+        .highlight-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #3e3932;
+        }
+        .highlight-item .num-mono {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 350;
+            letter-spacing: -0.02em;
+            color: #3f372d;
+            margin-bottom: 0.35rem;
+            line-height: 1;
+        }
+
+        .scene-list {
+            list-style: none;
+            margin: 1rem 0 1.8rem 0;
+            padding: 0;
+        }
+        .scene-list li {
+            position: relative;
+            padding: 0.4rem 0 0.4rem 1.6rem;
+            font-size: 0.96rem;
+            color: #2c2822;
+        }
+        .scene-list li::before {
+            content: "·";
+            position: absolute;
+            left: 0.4rem;
+            color: #afa69a;
+            font-weight: 700;
+        }
+
+        /* 提示 / 简短 FAQ */
+        .notice-box {
+            background: #f3f0eb;
+            border-left: 4px solid #bfb5a8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 14px 14px 0;
+            margin: 2rem 0 1.4rem 0;
+        }
+        .notice-box p {
+            margin: 0.2rem 0;
+            font-size: 0.93rem;
+            color: #38332c;
+        }
+        .notice-box strong {
+            font-weight: 500;
+            color: #1d1b16;
+        }
+
+        .faq-compact {
+            margin: 1.6rem 0 0.8rem 0;
+            border-top: 1px solid #e6e0d9;
+            padding-top: 1.2rem;
+        }
+        .faq-q {
+            font-weight: 450;
+            margin: 0.8rem 0 0.15rem 0;
+            color: #2b2721;
+        }
+        .faq-a {
+            font-size: 0.93rem;
+            margin: 0 0 1rem 0.6rem;
+            color: #524b42;
+            padding-left: 0.4rem;
+            border-left: 2px solid #ded7ce;
+        }
+
+        .footnote {
+            margin-top: 2.6rem;
+            font-size: 0.78rem;
+            color: #878075;
+            text-align: center;
+            border-top: 1px solid #ece6df;
+            padding-top: 1.8rem;
+        }
+        .footnote a {
+            color: #5f574b;
+            border-bottom: 1px solid #d0c8bc;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ede8e0;
+            margin: 1.8rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 区：标题 + 副标题 -->
+    <h1>世界杯·并非一次性的赛场</h1>
+    <div class="subhead">
+        四年一度，但故事从不中断。再次打开，像重返一个熟悉的坐标。
+    </div>
+
+    <!-- 摘要 / 叙述引入 -->
+    <p>
+        如果每次大赛结束后你都会悄悄收藏几个链接、几段录像，或是把某个页面留在浏览器标签栏里很久——那你大概明白我在说什么。那些属于 <a href="https://fifa-url-worldcup.com">世界杯</a> 的页面，往往比赛事本身更持久。
+    </p>
+    <p>
+        这个站点的存在不是为了追赶赛程，而是提供一个可以反复回来的地方：没有弹窗干扰、没有倒计时焦虑，只有干净的赛程脉络、历史记录和一点安静的整理感。
+    </p>
+
+    <!-- 亮点（卡片） -->
+    <h2>为什么值得保留</h2>
+    <div class="highlight-grid">
+        <div class="highlight-item">
+            <span class="num-mono">⏳</span>
+            <p><strong>历史回溯</strong> —— 从小组赛到决赛，过往届次的完整对阵与比分，保留原始记录风格。</p>
+        </div>
+        <div class="highlight-item">
+            <span class="num-mono">📋</span>
+            <p><strong>清晰赛历</strong> —— 未来赛程以本地时间呈现，支持订阅提醒（可选），无需反复搜索。</p>
+        </div>
+        <div class="highlight-item">
+            <span class="num-mono">🔄</span>
+            <p><strong>状态留存</strong> —— 再次访问时自动回到上次浏览的位置，收藏夹里放下也无妨。</p>
+        </div>
+    </div>
+
+    <!-- 场景 / 使用建议 -->
+    <h2>适合这样使用</h2>
+    <ul class="scene-list">
+        <li>赛前一周打开，把重点场次标记下来，顺便翻一翻上一届同阶段的比分。</li>
+        <li>赛后想回顾某一轮的全部结果，不需要翻社交平台——直接打开这个页面就好。</li>
+        <li>把网站放到书签栏的「体育」文件夹里，平时不打扰，大赛时自然用起来。</li>
+    </ul>
+    <p>
+        不需要注册或登录，没有信息流推荐。你可以把它理解为一份私人的、可随时查阅的世界杯参考页。
+    </p>
+
+    <!-- 提示 / 可信克制的访问说明 -->
+    <div class="notice-box">
+        <p><strong>关于访问</strong> · 本站不收集个人数据，不设付费内容。所有赛程数据来源于公开信息并定期核对。若发现某场时间或分组有出入，欢迎通过页面内联系方式提醒修正（联系方式位于页脚）。</p>
+        <p style="margin-top:0.6rem;"><strong>关于收藏</strong> · 建议将 <a href="https://fifa-url-worldcup.com">世界杯</a> 添加至浏览器书签或主屏幕，下次直接打开即可。页面结构长期稳定，不会突然改版或隐藏内容。</p>
+    </div>
+
+    <!-- FAQ 摘要（紧凑，不占过多篇幅） -->
+    <div class="faq-compact">
+        <div class="faq-q">— 页面多久更新一次？</div>
+        <div class="faq-a">重要赛程变动（时间、场地调整）通常在 24 小时内反映。历史数据保持静态，仅在发现错误时更正。</div>
+
+        <div class="faq-q">— 移动端显示正常吗？</div>
+        <div class="faq-a">适配手机和平板，窄屏下卡片变为纵向排列，字体和间距自动调整。阅读体验与桌面端一致。</div>
+
+        <div class="faq-q">— 可以将某个赛程分享给朋友吗？</div>
+        <div class="faq-a">可以复制当前页面链接，对方打开后看到的是同样的赛程视图。我们不会追踪分享行为。</div>
+    </div>
+
+    <hr>
+
+    <!-- 再一次的叙述：关于持续关注 -->
+    <p>
+        距离下一次大赛还有一段日子，但这不妨碍你把一个干净的世界杯页面留在手边。等赛程确定、等分组揭晓、等第一场哨声——然后你发现，你早就知道该去哪里找。
+    </p>
+    <p>
+        如果愿意，现在就可以记住这个地址：<a href="https://fifa-url-worldcup.com">世界杯</a>。不是作为一次访问，而是作为一个预留的座位。
+    </p>
+
+    <!-- 页脚（极简） -->
+    <div class="footnote">
+        <span>数据来源 · 公开赛事信息 ／ 上次核对 · 2025年4月</span><br>
+        <span style="display:inline-block; margin-top:0.5rem;">只提供事实，不制造情绪。</span>
+    </div>
+
+</div>
+</body>
+</html>
